@@ -4,6 +4,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 
 var app = express();
 var db;
@@ -33,15 +34,21 @@ app.get('/artists', function (req, res) {
 })
 
 app.get('/artists/:id', function (req, res) {
-    var artist = artists.find(function (artist) {
+    db.collection('artists').findOne({_id: ObjectId(req.params.id)}, function (err, doc) {
+        if (err){
+            console.log(err);
+            return req.sendStatus(500);
+        }
+        res.send(doc);
+    })
+    /*var artist = artists.find(function (artist) {
         return artist.id === Number(req.params.id)
-    });
-    res.send(artist);
+    });*/
+    //res.send(artist);
 })
 
 app.post('/artists', function (req, res) {
     var artist = {
-        //id: Date.now(),
         name: req.body.name
     }
     db.collection('artists').insert(artist, function (err, result) {
@@ -58,16 +65,14 @@ app.post('/artists', function (req, res) {
 })
 
 app.put('/artists/:id', function (req, res) {
+    db.collection('artists').update({_id: ObjectId(req.params.id)}, {name:req.body.name});
+    res.sendStatus(200);
+    /*
     var artist = artists.find(function (artist) {
         return artist.id === Number(req.params.id)
     });
-    console.log('/*-------------');
-    console.log(artist);
     artist.name = req.body.name;
-    console.log('обновлен на');
-    console.log(artist);
-    console.log('-------------*/');
-    res.sendStatus(200);
+    res.sendStatus(200);*/
 })
 
 app.delete('/artists/:id', function (req, res) {
@@ -88,6 +93,8 @@ app.delete('/artists/:id', function (req, res) {
     console.log('API app started');
 })*/
 
+//192.168.1.66 remote ip
+//localhost    local
 MongoClient.connect('mongodb://localhost:27017/mongo', function (err, database) {
     if (err){
         return console.log(err);
