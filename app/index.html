@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.angularjs.org/1.6.0/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.6.0/angular-route.min.js"></script>
+    <script>
+        var App =angular.module('App', ["ngRoute"]);
+        App.config(function ($routeProvider) {
+            $routeProvider
+                .when('/',
+                    {
+                        controller: 'SimpleController',
+                        templateUrl: 'Partials/View1.html'
+                    })
+                .when('/view2',
+                    {
+                        controller: 'SimpleController',
+                        templateUrl: 'Partials/View2.html'
+                    })
+                //.otherwise({redirectTo: '/'})
+            ;
+        });
+
+        App.factory('simpleFactory', function () {
+           var customers =  [
+               {name: 'John Smith', city: 'Phoenix'},
+               {name: 'Max Kuzichev', city: 'Astana'},
+               {name: 'Jane Doe', city: 'New York'}
+           ];
+
+           var factory = {};
+
+           factory.getCustomers = function () {
+               return customers;
+           };
+
+           factory.postCustomer = function () {
+
+           };
+
+           return factory;
+
+        });
+
+        App.service('dataService', function($http) {
+            delete $http.defaults.headers.common['X-Requested-With'];
+            this.getData = function(callbackFunc) {
+                $http.get('http://localhost:3012/music')
+                    .then(function(response) {
+                        callbackFunc(response);
+                    }, function errorCallback(response) {
+
+                    });
+            }
+        });
+
+        App.controller('SimpleController', function ($scope, simpleFactory, dataService) {
+            dataService.getData(function(dataResponse) {
+                $scope.music = dataResponse.data;
+            });
+            $scope.customers = [];
+            init();
+            function init() {
+                $scope.customers = simpleFactory.getCustomers();
+            }
+
+            $scope.addCustomer = function () {
+                $scope.customers.push(
+                    {name: $scope.newCustomer.name, city: $scope.newCustomer.city});
+            };
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <div data-ng-view></div>
+    </div>
+</body>
+
+</body>
+</html>
