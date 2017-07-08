@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 //var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectId;
 var db = require('./db');
-var sleep = require('sleep');
+//var sleep = require('sleep');
 var app = express();
 //var db;
 
@@ -27,7 +27,7 @@ app.get('/', function (req, res) {
 })
 
 app.get('/artists', function (req, res) {
-    sleep.sleep(5);
+    //sleep.sleep(5);
     db.get().collection('artists').find().toArray(function (err, docs) {
         if (err){
             console.log(err);
