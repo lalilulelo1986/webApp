@@ -54,12 +54,32 @@
 
                     });
             }
+            this.postData = function(data) {
+                $http.post(
+                    'http://localhost:3012/music/',
+                    data,
+                    'application/json'
+                    )
+                    .then(function(response) {
+
+                    }, function errorCallback(response) {
+
+                    });
+            }
+            this.deletetData = function(data) {
+                $http.delete(
+                    'http://localhost:3012/music/' + data
+                )
+                    .then(function(response) {
+
+                    }, function errorCallback(response) {
+
+                    });
+            }
         });
 
         App.controller('SimpleController', function ($scope, simpleFactory, dataService) {
-            dataService.getData(function(dataResponse) {
-                $scope.music = dataResponse.data;
-            });
+
             $scope.customers = [];
             init();
             function init() {
@@ -70,6 +90,23 @@
                 $scope.customers.push(
                     {name: $scope.newCustomer.name, city: $scope.newCustomer.city});
             };
+            /***********MUSIC*************/
+            $scope.music = [];
+            initMusic();
+            function initMusic() {
+                dataService.getData(function(dataResponse) {
+                    $scope.music = dataResponse.data;
+                });
+            }
+            $scope.addMusic = function () {
+                dataService.postData({name: $scope.newMusic.name, album: $scope.newMusic.album});
+                initMusic();
+            };
+            $scope.delMusic = function(music) {
+                dataService.deletetData(music);
+                initMusic();
+            }
+
 
         });
     </script>
