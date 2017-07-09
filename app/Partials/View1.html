@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>View1</h2>
+    <h2>Music</h2>
     Name:
     <br/>
     <input type="text" data-ng-model="filter.name"/>
@@ -9,9 +9,6 @@
             <button data-ng-click="delMusic(m._id)">Delete</button>
         </li>
     </ul>
-    <!--<ul>-->
-        <!--<li data-ng-repeat="cust in customers | filter:filter.name | orderBy:'cust.city'">{{cust.name}} - {{cust.city}}</li>-->
-    <!--</ul>-->
     Band Name:<br/>
     <input type="text" data-ng-model="newMusic.name"/>
     <br/>
@@ -19,6 +16,6 @@
     <input type="text" data-ng-model="newMusic.album"/>
     <br/>
     <button data-ng-click="addMusic()">Add Customer</button>
-    <a href="#!/view2">View 2</a>
+    <a href="#!/view2">Customers</a>
     <br/>
 </div>

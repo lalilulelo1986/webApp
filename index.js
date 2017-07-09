@@ -15,7 +15,6 @@ app.use(express.static('/app'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('app'));
-//app.use(express.static('files'));
 
 
 var artists = [
@@ -26,6 +25,11 @@ var artists = [
 
 app.get('/$', function (req, res) {
     res.sendFile(__dirname + '/app/index.html');
+    //res.send('Hello API');
+})
+
+app.get('/resolve$', function (req, res) {
+    res.sendFile(__dirname + '/app/resolve.html');
     //res.send('Hello API');
 })
 
