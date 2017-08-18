@@ -48,7 +48,7 @@
         App.service('dataService', function($http) {
             delete $http.defaults.headers.common['X-Requested-With'];
             this.getData = function(callbackFunc) {
-                $http.get('http://localhost:3012/music')
+                $http.get('http://localhost:3012/artists')
                     .then(function(response) {
                         callbackFunc(response);
                     }, function errorCallback(response) {
@@ -57,7 +57,7 @@
             }
             this.postData = function(data) {
                 $http.post(
-                    'http://localhost:3012/music/',
+                    'http://localhost:3012/artists/',
                     data,
                     'application/json'
                     )
@@ -69,7 +69,7 @@
             }
             this.deletetData = function(data) {
                 $http.delete(
-                    'http://localhost:3012/music/' + data
+                    'http://localhost:3012/artists/' + data
                 )
                     .then(function(response) {
 
