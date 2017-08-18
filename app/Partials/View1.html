@@ -5,7 +5,7 @@
     <input type="text" data-ng-model="filter.name"/>
     <br/>
     <ul>
-        <li data-ng-repeat="m in music | filter:filter.name | orderBy:m.name">{{m.name}} - {{m.album}}
+        <li data-ng-repeat="m in music | filter:filter.name | orderBy:m.name">{{m.id}} - {{m.name}}
             <button data-ng-click="delMusic(m._id)">Delete</button>
         </li>
     </ul>
