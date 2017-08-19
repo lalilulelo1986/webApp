@@ -9,13 +9,13 @@ var db = require('./db');
 var artists = require('./artists');
 //var sleep = require('sleep');
 var app = express();
-app.use(express.static('/app'));
+//app.use(express.static('/app'));
 //var db;
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static('app'));
+app.use(express.static('.'));
 
 artists.init(app);
 // var artists = [
@@ -25,7 +25,7 @@ artists.init(app);
 // ];
 
 app.get('/$', function (req, res) {
-    res.sendFile(__dirname + '/app/index.html');
+    res.sendFile(__dirname + '/index.html');
     //res.send('Hello API');
 })
 
