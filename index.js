@@ -114,7 +114,7 @@ db.connect("postgres://postgres:postgres@localhost:5432/postgres", function (err
     }
     //db = database;
     app.listen(3012, function () {
-        console.log('API app started');
+        console.log('API app started at localhost:3012');
     })
 
 })

@@ -12,11 +12,19 @@ app.use(express.static('/app'));
 
 exports.init = function(app) {
    app.get('/artists', function (req, res) {
+    var limit = req.query.limit || 'all';
+    var offset = req.query.offset || 0;
     const query = {
-      text: 'select id, name from artists'    
+      text: "select id, name from artists order by id limit all offset $1",
+      values: [offset]
     };
-    db.get().query(query, (err, result) => {
+    const query2 = {
+      text: "select id, name from artists order by id limit $1 offset $2",
+      values: [limit, offset]
+    };
+    db.get().query(limit=='all'?query:query2, (err, result) => {
       if (err) {
+        console.log(err);
         return res.sendStatus(500);
       } else {
         res.send(result.rows);
