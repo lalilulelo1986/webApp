@@ -15,11 +15,11 @@ exports.init = function(app) {
     var limit = req.query.limit || 'all';
     var offset = req.query.offset || 0;
     const query = {
-      text: "select id, name from artists order by id limit all offset $1",
+      text: "select id, name, count(*) over() totalRows from artists order by id limit all offset $1",
       values: [offset]
     };
     const query2 = {
-      text: "select id, name from artists order by id limit $1 offset $2",
+      text: "select id, name, count(*) over() totalRows from artists order by id limit $1 offset $2",
       values: [limit, offset]
     };
     db.get().query(limit=='all'?query:query2, (err, result) => {

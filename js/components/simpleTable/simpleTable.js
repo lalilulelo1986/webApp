@@ -14,9 +14,6 @@ angular.module('App')
           return true;
         return false;
       }
-      scope.config.log = function(rowSet, rowPerPage){
-        alert('rowSet:'+ rowSet + ' rowPerPage:' + rowPerPage);
-      }
   	},
     restrict: 'E',
   	scope: {
