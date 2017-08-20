@@ -3,10 +3,14 @@
    <div ng-if="config.rowSet.length > config.rowPerPage" class="btn-group" role="group">
    		<button ng-repeat="page in config.rowSet | paginPages:config.rowPerPage" ng-click="config.setCurrPage($index+1)" class="btn" type="button" ng-class="{'btn-default':!config.isCurrPage($index+1), 'btn-primary':config.isCurrPage($index+1)}">{{$index+1}}</div>
 	</div>
-   <div ng-repeat="e in config.rowSet | pagin:config.currPage:config.rowPerPage">
-   	{{e.name}}
-   </div>
-   <button ng-click="config.log(config.rowSet, config.rowPerPage)">Принять</button>
+	<table class="table">
+	   <tr ng-repeat="e in config.rowSet | pagin:config.currPage:config.rowPerPage">
+	   <td>
+	   	{{e.name}}
+	   	</td>
+	   </tr>
+   </table>
+   <button>Принять</button>
    <button>Сброс</button>
    <button>Отмена</button>
  </div>

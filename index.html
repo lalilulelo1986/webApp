@@ -18,6 +18,7 @@
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script> -->
 	<script src="js/rbk/invest/investCtrl.js"></script>
 	<script src="js/components/simpleTable/simpleTable.js"></script>
+	<script src="js/components/simpleTablePagination/simpleTablePagination.js"></script>
 	<style>
 		.currPage{ ba: blue};
 	</style>
@@ -26,7 +27,7 @@
 <div data-ng-controller="investTableCtrl">
 
 	<simple-table config="table1"></simple-table>
-
+    <simple-table-pagination config="table2"></simple-table-pagination>
 </div>
 <script type="text/javascript">
     	angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));

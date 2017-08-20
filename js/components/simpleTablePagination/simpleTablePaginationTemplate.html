@@ -1,0 +1,16 @@
+<div>
+   <p ng-hide="config.hideTitle">{{config.title}}</p>
+   <div ng-if="config.rowSet[0].totalrows > config.rowPerPage" class="btn-group" role="group">
+   	  <button ng-repeat="page in config.getPages(config.rowSet[0].totalrows) track by $index" ng-click="config.setCurrPage($index+1)" class="btn" type="button" ng-class="{'btn-default':!config.isCurrPage($index+1), 'btn-primary':config.isCurrPage($index+1)}">{{$index+1}}</div>
+	</div>
+   <table class="table">
+   <tr ng-repeat="e in config.rowSet">
+   <td>
+   	{{e.name}}
+   </td>
+   </tr>
+   </table>
+   <button>Принять</button>
+   <button>Сброс</button>
+   <button>Отмена</button>
+</div>

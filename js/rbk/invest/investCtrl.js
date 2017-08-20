@@ -8,15 +8,17 @@ angular.module('App', ['ngResource'])
 // }])
 .controller('investTableCtrl', ['$scope', '$resource', function($scope, $resource){
 	$scope.table1 = {};
-    //$scope.table1.elements = ['q','w','e','r','t','y','u','i'];
     $scope.table1.currPage = 1;
     $scope.table1.rowPerPage = 3;
-
-	//http://localhost:3012/artists
-	var Artists = $resource('artists');
-	Artists.query(function(result) {
+    $resource('artists').query(function(result){
 		$scope.table1.rowSet = result;
-	});
+    });
+
+	$scope.table2 = {};
+    $scope.table2.currPage = 1;
+    $scope.table2.rowPerPage = 3;
+	$scope.table2.resourceUrl = 'artists';
+	$scope.table2.resourceParam = {};
 
 	$scope.checkbox1 = {};
 	$scope.checkbox1.title = 'Таблица для инвест проектов';
